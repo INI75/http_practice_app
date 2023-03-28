@@ -18,7 +18,7 @@ class UserProfile extends StatelessWidget {
       body: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start, 
             children: [
               const SizedBox(height: 30),
               Text(

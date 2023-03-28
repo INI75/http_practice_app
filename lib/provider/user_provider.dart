@@ -15,6 +15,7 @@ class UsersProvider extends ChangeNotifier {
 
   Future<User?> userDetail(String section) async {
     User? userDetail = await services.fetchUserDetail(api: section);
+    
     notifyListeners();
     return userDetail;
   }

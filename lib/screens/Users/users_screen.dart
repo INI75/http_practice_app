@@ -22,8 +22,12 @@ class UserDisplay extends StatelessWidget {
         child: Visibility(
           visible: usersList.list.isNotEmpty,
           replacement: const Center(
-              child: SizedBox(
-                  width: 40, height: 40, child: CircularProgressIndicator())),
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: CircularProgressIndicator(),
+            ),
+          ),
           child: SizedBox(
             child: ListView.builder(
               itemCount: usersList.list.length,

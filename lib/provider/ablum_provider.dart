@@ -13,4 +13,8 @@ class AblumProvider extends ChangeNotifier {
     _ablumList = await baseClientService.fetchAbumList();
     notifyListeners();
   }
+
+  ///
+  ///
+  
 }
