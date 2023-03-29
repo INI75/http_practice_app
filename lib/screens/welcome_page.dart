@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http_practice_app/helpers/connectivity.dart';
 import 'package:http_practice_app/helpers/text_styles.dart';
 import 'package:http_practice_app/provider/ablum_provider.dart';
 import 'package:http_practice_app/provider/todo_provider.dart';
@@ -24,9 +25,37 @@ class _WelcomePageState extends State<WelcomePage> {
     });
   }
 
+  bool _isloading = false;
+
+  Future<bool> dataCheck() async {
+    _isloading = true;
+    bool a = await NetworkConnectivity().checkStatus();
+    _isloading = false;
+    return a;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context).size;
+    void nextPage() {
+      Navigator.pushNamed(context, UserDisplay.routeName);
+    }
+
+    ////
+    void show() {
+      showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            height: 150,
+            width: 150,
+            child: const Text(
+                'Please Ensure you are connected\nto the internet',
+                style: TextStyle(fontSize: 20)),
+          ),
+        ),
+      );
+    }
 
     return Container(
       padding: const EdgeInsets.only(top: 20, left: 18, right: 18),
@@ -39,27 +68,36 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
       child: Scaffold(
           backgroundColor: Colors.transparent,
-          body: Center(
-            child: SizedBox(
-              width: 200,
-              height: 200,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text('Hello welcome to Test App',
-                        textAlign: TextAlign.center, style: AppTextStyles.big),
-                    const SizedBox(height: 15),
-                    MaterialButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, UserDisplay.routeName);
-                      },
-                      color: Colors.blueAccent,
-                      minWidth: 300,
-                      child: const Text('Go to User List'),
-                    ),
-                  ]),
-            ),
-          )),
+          body: _isloading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Center(
+                  child: SizedBox(
+                    width: 200,
+                    height: 200,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Hello welcome to Test App',
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.big),
+                          const SizedBox(height: 15),
+                          MaterialButton(
+                            onPressed: () async {
+                              if (await dataCheck()) {
+                                nextPage();
+                              } else {
+                                show();
+                              }
+                            },
+                            color: Colors.blueAccent,
+                            minWidth: 300,
+                            child: const Text('Go to User List'),
+                          ),
+                        ]),
+                  ),
+                )),
     );
   }
 }

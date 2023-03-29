@@ -14,7 +14,7 @@ class UserDisplay extends StatelessWidget {
     final media = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Users Page')),
+      appBar: AppBar(title: const Text('Users List')),
       body: Container(
         width: media.width,
         height: media.height,
