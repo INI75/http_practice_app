@@ -2,16 +2,14 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class NetworkConnectivity {
-  Future<bool> checkStatus() async {
+ static Future<bool> checkStatus() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
-      print(connectivityResult);
       return true;
     } else {
-      print(connectivityResult);
       return false;
-    }  
+    }
   }
 
   // NetworkConnectivity._();

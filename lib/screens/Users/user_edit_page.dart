@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http_practice_app/models/user_model.dart';
 import 'package:http_practice_app/widgets/app_button.dart';
 
 class UserProfileEditPage extends StatelessWidget {

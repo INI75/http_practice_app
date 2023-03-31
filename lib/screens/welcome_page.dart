@@ -29,7 +29,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Future<bool> dataCheck() async {
     _isloading = true;
-    bool a = await NetworkConnectivity().checkStatus();
+    bool a = await NetworkConnectivity.checkStatus();
     _isloading = false;
     return a;
   }
@@ -39,8 +39,6 @@ class _WelcomePageState extends State<WelcomePage> {
     void nextPage() {
       Navigator.pushNamed(context, UserDisplay.routeName);
     }
-
-    ////
     void show() {
       showDialog(
         context: context,
